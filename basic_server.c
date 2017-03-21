@@ -23,6 +23,7 @@ void main(int argc, char *argv[])
 	server_fd=socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 	error_check(server_fd, "소켓 생성");
 
+	memset(&client_adr, 0, sizeof(client_adr));
 	memset(&server_adr, 0, sizeof(server_adr));
 	server_adr.sin_family=AF_INET;
 	server_adr.sin_port=htons(atoi(argv[1]));
@@ -33,6 +34,7 @@ void main(int argc, char *argv[])
 
 	client_adr_size=sizeof(client_adr);
 	client_fd=accept(server_fd, (struct sockaddr *)&client_adr, &client_adr_size);
+	printf("%s:%d의 연결요청\n", inet_ntoa(client_adr.sin_addr), ntohs(client_adr.sin_port));
 	error_check(client_fd, "연결요청 승인");
 
 	byte_size=write(client_fd, message, sizeof(message));
