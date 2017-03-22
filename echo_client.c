@@ -44,7 +44,7 @@ void main(int argc, char *argv[])
 		while(recv_len!=str_len)
 		{
 			recv_count=read(socket_fd, message, BUF_SIZE);
-			error_check(str_len, "데이터 수신");
+			error_check(recv_count, "데이터 수신");
 			recv_len+=recv_count;
 		}
 		message[str_len]=0;
