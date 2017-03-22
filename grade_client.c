@@ -40,15 +40,17 @@ void main(int argc, char *argv[])
 
 	printf("국어점수를 입력해주세요 : ");
 	scanf("%d", &score[top]);
-	value_check(score[top++]);
+	score[top]=value_check(score[top]);
+	top++;
 
 	printf("영어점수를 입력해주세요 : ");
 	scanf("%d", &score[top]);
-	value_check(score[top++]);
+	score[top]=value_check(score[top]);
+	top++;
 
 	printf("수학점수를 입력해주세요 : ");
 	scanf("%d", &score[top]);
-	value_check(score[top++]);
+	score[top]=value_check(score[top]);
 
 	array_len=write(socket_fd, score, sizeof(score)); //점수배열을 서버로 전송
 	printf("%d 바이트를 전송하였습니다\n", array_len);
@@ -86,7 +88,7 @@ int value_check(int score)
 	{
 		printf("값이 유효하지 않습니다. 다시입력해주세요 : ");
 		scanf("%d", &score);
-		value_check(score); //유효값 입력할때까지 재귀호출
+		score=value_check(score); //유효값 입력할때까지 재귀호출
 	}
 	return score;
 }
